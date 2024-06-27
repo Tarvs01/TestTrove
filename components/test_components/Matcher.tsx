@@ -3,18 +3,16 @@ import React, { useState, useEffect } from "react";
 import { ConnectLines } from "@/lines_component";
 import { ConnectElement } from "@/lines_component";
 import { Connect, ConnectProvider } from "@/lines_component";
-import { MatcherQuestionBody } from "../types";
-
-interface MatcherSubObject {
-  matchedWith: string;
-  colorIndex: number;
-}
+import { MatcherQuestionBody, MatcherSubObject, MatcherAnswer, OrderingAnswer } from "../types";
 
 interface MatcherProps {
-  incomingMatcherQuestion: MatcherQuestionBody
+  incomingMatcherQuestion: MatcherQuestionBody,
+  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  prevAnswer: MatcherAnswer ,
+  index: number
 }
 
-function Matcher({incomingMatcherQuestion} : MatcherProps) {
+function Matcher({incomingMatcherQuestion, setFinalAnswer, prevAnswer, index} : MatcherProps) {
   const [currentSelected, setCurrentSelected] = useState("");
   const [allMatches, setAllMatches] = useState<{
     [index: string]: MatcherSubObject;
@@ -25,23 +23,12 @@ function Matcher({incomingMatcherQuestion} : MatcherProps) {
 
   useEffect(() => {
     setDomLoaded(true);
-  })
+    setAllMatches(prevAnswer);
+  },[]);
 
-  /* let matcherQuestion = {
-    cat: "kitten",
-    dog: "puppy",
-    cow: "calf",
-    goat: "kid",
-    horse: "foal",
-    pig: "piglet",
-  }; */
-  /* let matcherQuestion = {
-    left: ["cat", "dog", "cow", "goat", "horse", "pig"],
-    right: ["kitten", "puppy", "calf", "kid", "foal", "piglet"],
-    leftHeading: "Adult",
-    rightHeading: "Young",
-    q: "Match the animals on the left with their corresponding offspring on the right"
-  }; */
+  useEffect(() => {
+    setFinalAnswer(index, allMatches);
+  }, [allMatches]);
 
   const colors = [
     "border-purple-500",
@@ -170,7 +157,6 @@ function Matcher({incomingMatcherQuestion} : MatcherProps) {
             );
           })}
         </ul>
-
 
         {/* <h1 id="ele1">Lorem ipsum dolor sit.</h1>
         <h1 id="ele2">Lorem ipsum dolor sit amet.</h1> */}

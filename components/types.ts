@@ -19,3 +19,19 @@ export interface OrderingQuestionBody{
 export interface ShortAnswerQuestionBody{
     q: string,
 }
+
+export interface MatcherSubObject {
+    matchedWith: string;
+    colorIndex: number;
+}
+
+export interface MatcherAnswer {
+    [index: string] : MatcherSubObject
+}
+
+interface OrderingItem{
+    id: string,
+    value: string
+}
+
+export interface OrderingAnswer extends Array<OrderingItem>{}

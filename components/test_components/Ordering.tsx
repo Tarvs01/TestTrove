@@ -6,14 +6,17 @@ import {
   DropResult,
   Droppable,
 } from "@hello-pangea/dnd";
-import { OrderingQuestionBody } from "../types";
+import { OrderingQuestionBody, MatcherAnswer, OrderingAnswer } from "../types";
 
 interface OrderingProps {
   incomingOrderingQuestion: OrderingQuestionBody,
+  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer) => void,
+  index: number,
+  prevAnswer: OrderingAnswer
 }
 
 function Ordering({incomingOrderingQuestion} : OrderingProps) {
-  const [orderItems, setOrderItems] = useState<{ id: string; value: string }[]>(
+  const [orderItems, setOrderItems] = useState<OrderingAnswer>(
     []
   );
 

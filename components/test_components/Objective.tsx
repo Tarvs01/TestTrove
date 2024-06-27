@@ -1,13 +1,16 @@
 "use client"
 import React, {useState, useEffect} from 'react'
-import { ObjectiveQuestionBody } from '../types';
+import { ObjectiveQuestionBody, MatcherAnswer, OrderingAnswer } from '../types';
 
 interface ObjectiveProps{
-  incomingObjectiveQuestion: ObjectiveQuestionBody
+  incomingObjectiveQuestion: ObjectiveQuestionBody,
+  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  index: number,
+  prevAnswer: string
 }
 
-function Objective({incomingObjectiveQuestion} : ObjectiveProps) {
-  const [currentOption, setCurrentOption] = useState(0);
+function Objective({incomingObjectiveQuestion, setFinalAnswer, index, prevAnswer} : ObjectiveProps) {
+  const [currentOption, setCurrentOption] = useState(-1);
   const [question, setQuestion] = useState<ObjectiveQuestionBody>({q: "", options: []})
     /* let question = {
         q: "What game has the best gameplay?",
@@ -16,7 +19,13 @@ function Objective({incomingObjectiveQuestion} : ObjectiveProps) {
 
   useEffect(() => {
     setQuestion(incomingObjectiveQuestion);
+    const tempAnswerIndex = prevAnswer ==  "" ? -1 : incomingObjectiveQuestion.options.findIndex((a) => a == prevAnswer);
+    setCurrentOption(tempAnswerIndex);
   },[]);
+
+  useEffect(() => {
+    setFinalAnswer(index, question.options[currentOption]);
+  },[currentOption]);
   return (
     <div className="w-11/12 max-w-lg my-12.5 mx-10 sm:mx-auto ">
       <h3 className='mb-2'>{question.q}</h3>

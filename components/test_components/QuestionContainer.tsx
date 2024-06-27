@@ -6,9 +6,12 @@ import Ordering from "./Ordering";
 import ShortAnswer from "./ShortAnswer";
 import {
   MatcherQuestionBody,
+  MatcherSubObject,
   ObjectiveQuestionBody,
   OrderingQuestionBody,
   ShortAnswerQuestionBody,
+  MatcherAnswer,
+  OrderingAnswer
 } from "../types";
 import { nanoid } from "nanoid";
 
@@ -23,7 +26,7 @@ function QuestionContainer() {
         | OrderingQuestionBody
         | ShortAnswerQuestionBody
         | string;
-      answer: string;
+      answer: MatcherAnswer | OrderingAnswer | string;
     }[]
   >([
     {
@@ -70,6 +73,20 @@ function QuestionContainer() {
       answer: "",
     },
   ]);
+
+  function setAnswer(questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer){
+    setAllQuestions(allQuestions.map((question, index) => {
+      if(questionIndex === index){
+        let temporaryQuestionHolder = question;
+        temporaryQuestionHolder.answer = answer;
+        return temporaryQuestionHolder;
+      }
+      else{
+        return question;
+      }
+    }));
+  }
+
   return (
     <div className="bg-white mx-auto px-2 max-w-4xl py-4 rounded-md min-h-90v mt-9">
       <header className="flex justify-between max-w-lg px-1 mx-auto border w-full">
@@ -85,14 +102,16 @@ function QuestionContainer() {
               const tempQuestionHolder: MatcherQuestionBody = allQuestions[
                 currentQuestionNumber
               ].question as MatcherQuestionBody;
-              return <Matcher incomingMatcherQuestion={tempQuestionHolder} />;
+              const tempAnswerHolder: MatcherAnswer = allQuestions[currentQuestionNumber].answer as MatcherAnswer;
+              return <Matcher incomingMatcherQuestion={tempQuestionHolder} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder} index={currentQuestionNumber}/>;
             }
             case "Objective": {
               const tempQuestionHolder: ObjectiveQuestionBody = allQuestions[
                 currentQuestionNumber
               ].question as ObjectiveQuestionBody;
+              const tempAnswerHolder : string = allQuestions[currentQuestionNumber].answer as string;
               return (
-                <Objective incomingObjectiveQuestion={tempQuestionHolder} />
+                <Objective incomingObjectiveQuestion={tempQuestionHolder} prevAnswer={tempAnswerHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer}/>
               );
             }
             case "Ordering": {
@@ -119,6 +138,14 @@ function QuestionContainer() {
           }
         })()}
       </main>
+      <div className="flex px-6">
+        {currentQuestionNumber > 0 && <button className="border w-40 py-2 bg-green-600 text-white" onClick={() => {
+          setCurrentQuestionNumber(currentQuestionNumber - 1);
+        }}>Previous</button>}
+        {currentQuestionNumber < allQuestions.length - 1 && <button className="border w-40 py-2 bg-green-600 text-white ml-auto" onClick={() => {
+          setCurrentQuestionNumber(currentQuestionNumber + 1);
+        }}>Next</button>}
+      </div>
       <footer className="flex">
         {allQuestions.map((question, index) => {
           return (
