@@ -69,7 +69,9 @@ function QuestionContainer() {
     },
     {
       type: "ShortAnswer",
-      question: "What is the capital of Germany?",
+      question: {
+        q: "What is the capital of Germany?"
+      },
       answer: "",
     },
   ]);
@@ -118,14 +120,16 @@ function QuestionContainer() {
               const tempQuestionHolder: OrderingQuestionBody = allQuestions[
                 currentQuestionNumber
               ].question as OrderingQuestionBody;
-              return <Ordering incomingOrderingQuestion={tempQuestionHolder} />;
+              const tempAnswerHolder: OrderingAnswer = allQuestions[currentQuestionNumber].answer as OrderingAnswer;
+              return <Ordering incomingOrderingQuestion={tempQuestionHolder} prevAnswer={tempAnswerHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} />;
             }
             case "ShortAnswer": {
               const tempQuestionHolder: ShortAnswerQuestionBody = allQuestions[
                 currentQuestionNumber
               ].question as ShortAnswerQuestionBody;
+              const tempAnswerHolder: string = allQuestions[currentQuestionNumber].answer as string;
               return (
-                <ShortAnswer incomingShortAnswerQuestion={tempQuestionHolder} />
+                <ShortAnswer incomingShortAnswerQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder}/>
               );
             }
             default:

@@ -10,19 +10,28 @@ import { OrderingQuestionBody, MatcherAnswer, OrderingAnswer } from "../types";
 
 interface OrderingProps {
   incomingOrderingQuestion: OrderingQuestionBody,
-  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer) => void,
+  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
   index: number,
-  prevAnswer: OrderingAnswer
+  prevAnswer: OrderingAnswer,
 }
 
-function Ordering({incomingOrderingQuestion} : OrderingProps) {
+function Ordering({incomingOrderingQuestion, setFinalAnswer, index, prevAnswer} : OrderingProps) {
   const [orderItems, setOrderItems] = useState<OrderingAnswer>(
     []
   );
 
   useEffect(() => {
-    setOrderItems(incomingOrderingQuestion.orderItems);
+    if(prevAnswer.length !== 0){
+      setOrderItems(prevAnswer);
+    }
+    else{
+      setOrderItems(incomingOrderingQuestion.orderItems);
+    }
   }, []);
+
+  useEffect(() => {
+    setFinalAnswer(index, orderItems)
+  }, [orderItems])
 
   const handleDragEnd = (result: DropResult) => {
     console.log(orderItems);

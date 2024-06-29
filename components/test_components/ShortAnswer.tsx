@@ -1,17 +1,30 @@
 'use client'
-import React, {useState} from 'react'
-import { ShortAnswerQuestionBody } from '../types';
+import React, {useState, useEffect, ChangeEvent} from 'react'
+import { ShortAnswerQuestionBody, MatcherAnswer, OrderingAnswer } from '../types';
 
 interface ShortAnswerProps {
-  incomingShortAnswerQuestion: ShortAnswerQuestionBody
+  incomingShortAnswerQuestion: ShortAnswerQuestionBody,
+  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  index: number,
+  prevAnswer: string
 }
 
-function ShortAnswer({incomingShortAnswerQuestion} : ShortAnswerProps) {
+function ShortAnswer({incomingShortAnswerQuestion, setFinalAnswer, index, prevAnswer} : ShortAnswerProps) {
   const [answer, setAnswer] = useState("");
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>){
+    setAnswer(e.target.value);
+    setFinalAnswer(index, e.target.value);
+  }
+
+  useEffect(() => {
+    setAnswer(prevAnswer);
+  },[])
+
   return (
     <div>
       <h2>{incomingShortAnswerQuestion.q}</h2>
-      <input type="text" name="answer" id="answer" className='block border-2 border-b-gray-400' />
+      <input type="text" name="answer" id="answer" value={answer} onInput={handleChange} className='block border-2 mt-3 w-full max-w-96 h-9 border-blue-500 rounded-md px-1 focus:outline-none' />
     </div>
   )
 }

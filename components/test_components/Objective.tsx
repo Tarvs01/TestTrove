@@ -27,12 +27,12 @@ function Objective({incomingObjectiveQuestion, setFinalAnswer, index, prevAnswer
     setFinalAnswer(index, question.options[currentOption]);
   },[currentOption]);
   return (
-    <div className="w-11/12 max-w-lg my-12.5 mx-10 sm:mx-auto ">
+    <div>
       <h3 className='mb-2'>{question.q}</h3>
       <ul className='flex flex-col w-full'>
         {
             question.options.map((single, index) => {
-                return <li key={index} onClick={() => {setCurrentOption(index)}} className={`${currentOption === index ? "border-purple-800 border-2" : "border-gray-300 border-2"} my-1 py-3 px-3 rounded-xl transition linear duration-300 hover:bg-gray-200 `}>
+                return <li key={index} onClick={() => {setCurrentOption(index)}} className={`${currentOption === index ? "border-purple-800 border-2" : "border-gray-300 border-2"} my-1 py-3 px-3 rounded-xl transition linear duration-200 hover:bg-gray-200 `}>
                     <input type="radio" name="option" id={`opt${index}`} className='appearance-none'/>
                     <label htmlFor={`opt${index}`}>{single}</label>
                 </li>
