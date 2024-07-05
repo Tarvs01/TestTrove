@@ -6,11 +6,11 @@ import {
   DropResult,
   Droppable,
 } from "@hello-pangea/dnd";
-import { OrderingQuestionBody, MatcherAnswer, OrderingAnswer } from "../types";
+import { OrderingQuestionBody, OrderingAnswer, FinalAnswer } from "../types";
 
 interface OrderingProps {
   incomingOrderingQuestion: OrderingQuestionBody,
-  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  setFinalAnswer: FinalAnswer,
   index: number,
   prevAnswer: OrderingAnswer,
 }

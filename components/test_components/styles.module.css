@@ -1,0 +1,16 @@
+textarea::-webkit-scrollbar{
+    width: 6px;
+}
+
+textarea::-webkit-scrollbar-track{
+    color: white;
+}
+
+textarea::-webkit-scrollbar-thumb{
+    color: gray;
+}
+
+.cover textarea{
+    background-color: red;
+    color: green;
+}

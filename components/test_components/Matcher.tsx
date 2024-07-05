@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import { ConnectLines } from "@/lines_component";
 import { ConnectElement } from "@/lines_component";
 import { Connect, ConnectProvider } from "@/lines_component";
-import { MatcherQuestionBody, MatcherSubObject, MatcherAnswer, OrderingAnswer } from "../types";
+import { MatcherQuestionBody, MatcherSubObject, MatcherAnswer, FinalAnswer } from "../types";
 
 interface MatcherProps {
   incomingMatcherQuestion: MatcherQuestionBody,
-  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  setFinalAnswer: FinalAnswer,
   prevAnswer: MatcherAnswer ,
   index: number
 }

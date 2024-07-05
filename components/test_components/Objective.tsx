@@ -1,10 +1,10 @@
 "use client"
 import React, {useState, useEffect} from 'react'
-import { ObjectiveQuestionBody, MatcherAnswer, OrderingAnswer } from '../types';
+import { ObjectiveQuestionBody, FinalAnswer } from '../types';
 
 interface ObjectiveProps{
   incomingObjectiveQuestion: ObjectiveQuestionBody,
-  setFinalAnswer: (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) => void,
+  setFinalAnswer: FinalAnswer,
   index: number,
   prevAnswer: string
 }

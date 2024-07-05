@@ -11,9 +11,12 @@ import {
   OrderingQuestionBody,
   ShortAnswerQuestionBody,
   MatcherAnswer,
-  OrderingAnswer
+  OrderingAnswer,
+  FinalAnswer,
+  LongAnswerQuestionBody
 } from "../types";
 import { nanoid } from "nanoid";
+import LongAnswer from "./LongAnswer";
 
 function QuestionContainer() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0);
@@ -25,6 +28,7 @@ function QuestionContainer() {
         | ObjectiveQuestionBody
         | OrderingQuestionBody
         | ShortAnswerQuestionBody
+        | LongAnswerQuestionBody
         | string;
       answer: MatcherAnswer | OrderingAnswer | string;
     }[]
@@ -74,9 +78,16 @@ function QuestionContainer() {
       },
       answer: "",
     },
+    {
+      type: "LongAnswer",
+      question: {
+        q: 'Describe your experience using this website'
+      },
+      answer: ""
+    },
   ]);
 
-  function setAnswer(questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer){
+  const setAnswer : FinalAnswer = (questionIndex, answer) => {
     setAllQuestions(allQuestions.map((question, index) => {
       if(questionIndex === index){
         let temporaryQuestionHolder = question;
@@ -132,6 +143,11 @@ function QuestionContainer() {
                 <ShortAnswer incomingShortAnswerQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder}/>
               );
             }
+            case "LongAnswer": {
+              const tempQuestionHolder : LongAnswerQuestionBody = allQuestions[currentQuestionNumber].question as LongAnswerQuestionBody;
+              const tempAnswerHolder : string = allQuestions[currentQuestionNumber].answer as string;
+              return <LongAnswer incomingLongAnswerQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder} />
+            }
             default:
               return (
                 <div>
@@ -150,7 +166,7 @@ function QuestionContainer() {
           setCurrentQuestionNumber(currentQuestionNumber + 1);
         }}>Next</button>}
       </div>
-      <footer className="flex">
+      <footer className="flex mt-5">
         {allQuestions.map((question, index) => {
           return (
             <button
@@ -163,6 +179,7 @@ function QuestionContainer() {
           );
         })}
       </footer>
+
     </div>
   );
 }
