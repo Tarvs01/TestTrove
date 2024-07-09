@@ -1,6 +1,6 @@
 import React, {useState, useEffect, ChangeEvent} from 'react'
 import { FinalAnswer, LongAnswerQuestionBody } from '../types'
-import styles from "../editor_component/styles.module.css"
+import styles from "../test_components/styles.module.css"
 
 interface LongAnswerProps {
     incomingLongAnswerQuestion: LongAnswerQuestionBody,
@@ -24,7 +24,7 @@ function LongAnswer({incomingLongAnswerQuestion, setFinalAnswer, index, prevAnsw
     return (
       <div className={styles.cover}>
         <h2>{incomingLongAnswerQuestion.q}</h2>
-        <textarea name="answer" id="answer" value={answer} onChange={handleChange} className='border-2 my-3 w-full max-w-lg min-h-40' >
+        <textarea name="answer" id="answer" value={answer} onChange={handleChange} className='border-2 border-gray-300 my-3 w-full max-w-lg h-44 px-2 focus:outline-gray-500 focus:border-none rounded-md' >
             Type in your answer
         </textarea>
       </div>

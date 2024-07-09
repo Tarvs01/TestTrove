@@ -1,16 +1,17 @@
-textarea::-webkit-scrollbar{
-    width: 6px;
+.cover textarea::-webkit-scrollbar{
+    width: 14px;
+    background-color: transparent;
 }
 
-textarea::-webkit-scrollbar-track{
-    color: white;
+.cover textarea::-webkit-scrollbar-track{
+    color: blue;
+    margin: 2px;
 }
 
-textarea::-webkit-scrollbar-thumb{
-    color: gray;
-}
-
-.cover textarea{
-    background-color: red;
-    color: green;
+.cover textarea::-webkit-scrollbar-thumb{
+    background-color: gray;
+    -webkit-border-radius: 6px;
+    background-clip: padding-box;
+    border-right: 2px solid transparent;
+    border-left: 2px solid transparent;
 }

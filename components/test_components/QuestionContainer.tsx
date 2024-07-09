@@ -108,7 +108,7 @@ function QuestionContainer() {
         </span>
         <span>Time Left: 00:00:00</span>
       </header>
-      <main>
+      <main className="px-4 my-6">
         {(() => {
           switch (allQuestions[currentQuestionNumber].type) {
             case "Matcher": {
