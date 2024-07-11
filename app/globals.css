@@ -32,3 +32,29 @@ body {
   }
 }
  */
+
+/*   .ql-container{
+    border: 2px solid gray !important;
+  }
+
+  .ql-toolbar{
+    border: 2px solid gray !important;
+  } */
+
+ .ql-editor::-webkit-scrollbar{
+  width: 14px;
+  background-color: transparent;
+}
+
+.ql-editor::-webkit-scrollbar-track{
+  color: blue;
+  margin: 2px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb{
+  background-color: gray;
+  -webkit-border-radius: 6px;
+  background-clip: padding-box;
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
+}

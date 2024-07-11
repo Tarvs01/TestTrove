@@ -96,7 +96,6 @@ const Editor = () => {
 
   return (
     <div className={styles.wrapper}>
-      <label className={styles.label}>Editor Content</label>
       <QuillEditor
         ref={quillRef}
         className={styles.editor}
@@ -106,9 +105,6 @@ const Editor = () => {
         modules={modules}
         onChange={(value) => setValue(value)}
       />
-      <button onClick={handler} className={styles.btn}>
-        Submit
-      </button>
     </div>
   );
 };
