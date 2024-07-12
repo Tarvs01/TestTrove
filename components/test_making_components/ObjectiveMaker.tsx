@@ -40,7 +40,7 @@ function ObjectiveMaker() {
   return (
     <div className='mx-3'>
       <h3>Type in your question</h3>
-      {/* <Editor /> */}
+      <Editor updateValue={setQuestion} value={question}/>
 
       <div className='my-5'>
         <h3>Enter the options</h3>

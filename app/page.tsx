@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import QuestionContainer from "@/components/test_components/QuestionContainer";
+import QuestionContainer from "@/components/test_taking_components/QuestionContainer";
 
 export default function Home() {
   return (

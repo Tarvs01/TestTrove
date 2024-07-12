@@ -11,17 +11,17 @@ import styles from "./styles.module.css";
 
 import ReactQuill from "react-quill";
 
-const Editor = () => {
+interface EditorProps{
+  updateValue: React.Dispatch<React.SetStateAction<string>>,
+  value: string
+}
+
+const Editor = ({updateValue, value}: EditorProps) => {
   // Editor state
-  const [value, setValue] = useState("");
+  //const [value, setValue] = useState("");
 
   // Editor ref
   const quillRef: React.LegacyRef<ReactQuill> = useRef(null);
-
-  // Handler to handle button clicked
-  function handler() {
-    console.log(value);
-  }
 
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
@@ -103,7 +103,7 @@ const Editor = () => {
         value={value}
         formats={formats}
         modules={modules}
-        onChange={(value) => setValue(value)}
+        onChange={(value) => updateValue(value)}
       />
     </div>
   );
