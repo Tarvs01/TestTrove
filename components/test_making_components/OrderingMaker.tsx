@@ -1,13 +1,17 @@
 'use client'
 import React, {useState, useEffect, ChangeEvent} from 'react'
+import Editor from '../editor_component/Editor';
 import Image from 'next/image';
 import DownArrow from "../../assets/icons/arrow-down-solid.svg"
 import Trashcan from "../../assets/icons/trash-solid.svg"
 
 function OrderingMaker() {
     const [orderItems, setOrderItems] = useState<{id:number, value: string}[]>([{id: 0, value: ""}, {id: 1, value: ""}]);
+    const [question, setQuestion] = useState("");
+    const [error, setError] = useState("");
 
     function textareaHandler(e: ChangeEvent<HTMLTextAreaElement>, selectedOptionId: number){
+        setError("");
         let tempItems : {id: number, value: string}[] = orderItems.map((item) => {
             if(item.id === selectedOptionId){
               return {id: item.id, value: e.target.value};
@@ -40,10 +44,26 @@ function OrderingMaker() {
         setOrderItems(tempItems);
     }
 
+    function handleSubmit(){
+        if(question.trim() === ""){
+            setError("There must be a question");
+            return;
+        };
+        
+        for(let item of orderItems){
+            if(item.value.trim() === ""){
+                setError("All items must have a value");
+                return;
+            }
+        }
+        setError("Good to go")
+    }
+
   return (
-    <div className='mx-2'>
+    <div className='mx-2 max-w-screen-md'>
         <div>
             <h3>Type in your question</h3>
+            <Editor updateValue={setQuestion} value={question} />
         </div>
 
         <div>
@@ -60,6 +80,10 @@ function OrderingMaker() {
                 })
             }
             <button onClick={addItem} className='border-2 border-gray-400 px-5 py-2 rounded-md mt-6 ml-5'>Add Item</button>
+            <div className='mt-3 flex flex-col items-center'>
+                <h3 className='my-2 text-red-600'>{error}</h3>
+                <button onClick={handleSubmit} className='border-2 border-gray-400 px-5 py-2 rounded-md ml-5 w-fit'>Submit</button>
+            </div>
         </div>
     </div>
   )
