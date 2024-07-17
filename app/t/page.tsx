@@ -7,9 +7,9 @@ import React from 'react'
 function page() {
   return (
     <div className='min-h-screen border'>
-      {/* <ObjectiveMaker /> */}
+      <ObjectiveMaker />
       {/* <OrderingMaker /> */}
-      <MatcherMaker />
+      {/* <MatcherMaker /> */}
         {/* <QuestionContainer /> */}
     </div>
   )

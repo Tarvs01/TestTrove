@@ -4,6 +4,8 @@ import Image from 'next/image'
 import RightArrow from "../../assets/icons/arrow-right-solid.svg"
 import Trashcan from "../../assets/icons/trash-solid.svg"
 import Editor from '../editor_component/Editor'
+import Textarea from './Textarea'
+import Button from './Button'
 
 function MatcherMaker() {
     const [matches, setMatches] = useState<{id: number, right: string, left: string}[]>([{id: 0, left: "", right: ""}, {id: 1, left: "", right: ""}]);
@@ -26,9 +28,6 @@ function MatcherMaker() {
           });
 
         setMatches(tempMatches);
-
-        e.target.style.height = "1px";
-        e.target.style.height = `${5 + e.target.scrollHeight}px`;
     }
 
     function addMatch(){
@@ -79,19 +78,19 @@ function MatcherMaker() {
             {
                 matches.map((match) => {
                     return <div key={match.id} className='flex flex-nowrap items-center mb-5'>
-                        <textarea name="left-item" value={match.left} onInput={(e: ChangeEvent<HTMLTextAreaElement>) => handleTextarea(e, match.id, "L")} rows={1} className='border-2 border-gray-300 w-1/2 max-w-80 resize-none px-2 py-1 overflow-hidden rounded-lg focus:outline-none focus:border-blue-600'></textarea>
+                        <Textarea name='left-item' onInput={(e) => handleTextarea(e, match.id, "L")} value={match.left} />
                         <div className='mx-2'><Image src={RightArrow} alt='right-arrow' width={20} height={20} /></div>
-                        <textarea name="left-item" value={match.right} onInput={(e: ChangeEvent<HTMLTextAreaElement>) => handleTextarea(e, match.id, "R")} rows={1} className='border-2 border-gray-300 w-1/2 max-w-80 resize-none px-2 py-1 overflow-hidden rounded-lg focus:outline-none focus:border-blue-600'></textarea>
+                        <Textarea name='right=item' onInput={(e) => handleTextarea(e, match.id, "R")} value={match.right} />
                         {![0,1].includes(match.id) && <div onClick={() => deleteMatch(match.id)} className='ml-3 cursor-pointer'><Image src={Trashcan} alt='delete' width={15} height={15}/></div>}
                     </div>
                 })
             }
-            <button onClick={addMatch} className='border-2 border-gray-400 px-5 py-2 rounded-md ml-5 w-fit'>Add match</button>
+            <Button text='Add Item' onClick={() => addMatch()} />
         </div>
 
         <div className='mt-3 flex flex-col items-center'>
             <h3 className='my-2 text-red-600'>{error}</h3>
-            <button onClick={handleSubmit} className='border-2 border-gray-400 px-5 py-2 rounded-md ml-5 w-fit'>Submit</button>
+            <Button text='Submit' onClick={() => handleSubmit()} />
         </div>
     </div>
   )
