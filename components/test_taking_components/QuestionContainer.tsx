@@ -4,6 +4,7 @@ import Matcher from "./Matcher";
 import Objective from "./Objective";
 import Ordering from "./Ordering";
 import ShortAnswer from "./ShortAnswer";
+import CheckboxSelect from "./CheckboxSelect";
 import {
   MatcherQuestionBody,
   MatcherSubObject,
@@ -85,6 +86,11 @@ function QuestionContainer() {
       },
       answer: ""
     },
+    {
+      type: "CheckboxSelect",
+      question: "",
+      answer: ""
+    }
   ]);
 
   const setAnswer : FinalAnswer = (questionIndex, answer) => {
@@ -147,6 +153,9 @@ function QuestionContainer() {
               const tempQuestionHolder : LongAnswerQuestionBody = allQuestions[currentQuestionNumber].question as LongAnswerQuestionBody;
               const tempAnswerHolder : string = allQuestions[currentQuestionNumber].answer as string;
               return <LongAnswer incomingLongAnswerQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder} />
+            }
+            case "CheckboxSelect": {
+              return <CheckboxSelect />
             }
             default:
               return (
