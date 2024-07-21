@@ -8,7 +8,7 @@ export interface MatcherQuestionBody{
 
 export interface ObjectiveQuestionBody{
     q: string,
-    options: string[]
+    options: {id: number, value: string}[]
 }
 
 export interface OrderingQuestionBody{
@@ -24,6 +24,15 @@ export interface LongAnswerQuestionBody{
     q: string,
 }
 
+export interface MultiOptionsQuestionBody{
+    q: string;
+    options: {
+        id: number;
+        value: string;
+        selected: boolean;
+    }[];
+}
+
 export interface MatcherSubObject {
     matchedWith: string;
     colorIndex: number;
@@ -34,7 +43,7 @@ export interface MatcherAnswer {
 }
 
 export interface FinalAnswer {
-    (questionIndex: number, answer: string | MatcherAnswer | OrderingAnswer) : void
+    (questionIndex: number, answer: string | number | number[] | MatcherAnswer | OrderingAnswer) : void
 }
 
 

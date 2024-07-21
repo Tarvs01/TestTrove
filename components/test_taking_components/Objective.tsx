@@ -7,7 +7,7 @@ interface ObjectiveProps {
   incomingObjectiveQuestion: ObjectiveQuestionBody;
   setFinalAnswer: FinalAnswer;
   index: number;
-  prevAnswer: string;
+  prevAnswer: number;
 }
 
 function Objective({
@@ -28,42 +28,44 @@ function Objective({
 
   useEffect(() => {
     setQuestion(incomingObjectiveQuestion);
-    const tempAnswerIndex =
-      prevAnswer == ""
+    /* const tempAnswerIndex =
+      prevAnswer == -1
         ? -1
-        : incomingObjectiveQuestion.options.findIndex((a) => a == prevAnswer);
-    setCurrentOption(tempAnswerIndex);
+        : incomingObjectiveQuestion.options.findIndex((a) => a.id == prevAnswer); //Remove this later since it is redundant.
+     */
+        setCurrentOption(prevAnswer);
   }, []);
 
   useEffect(() => {
-    setFinalAnswer(index, question.options[currentOption]);
+    setFinalAnswer(index, currentOption);
   }, [currentOption]);
   return (
     <div>
       <h3 className="mb-2">{question.q}</h3>
       <ul className="flex flex-col w-full">
-        {question.options.map((single, index) => {
+        {question.options.map((option) => {
           return (
             <li
-              key={index}
+              key={option.id}
+              onClick={() => setCurrentOption(option.id)}
               className={`${
-                currentOption === index
+                currentOption === option.id
                   ? "border-purple-800 border-2"
                   : "border-gray-300 border-2"
               } my-1 py-3 px-3 rounded-xl transition linear duration-200 hover:bg-gray-200 ${styles.option_list}`}
             >
               <input
                 type="radio"
-                value={single}
+                value={option.value}
                 name={`option`}
-                id={`opt${index}`}
+                id={`opt${option.id}`}
                 onClick={() => {
-                  setCurrentOption(index);
+                  setCurrentOption(option.id);
                 }}
                 className="appearance-none"
                 tabIndex={0}
               />
-              <label htmlFor={`opt${index}`}>{single}</label>
+              <label htmlFor={`opt${option.id}`}>{option.value}</label>
             </li>
           );
         })}

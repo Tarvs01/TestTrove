@@ -4,7 +4,7 @@ import Matcher from "./Matcher";
 import Objective from "./Objective";
 import Ordering from "./Ordering";
 import ShortAnswer from "./ShortAnswer";
-import CheckboxSelect from "./CheckboxSelect";
+import MultiOptions from "./MultiOptions";
 import {
   MatcherQuestionBody,
   MatcherSubObject,
@@ -14,7 +14,8 @@ import {
   MatcherAnswer,
   OrderingAnswer,
   FinalAnswer,
-  LongAnswerQuestionBody
+  LongAnswerQuestionBody,
+  MultiOptionsQuestionBody
 } from "../types";
 import { nanoid } from "nanoid";
 import LongAnswer from "./LongAnswer";
@@ -30,8 +31,9 @@ function QuestionContainer() {
         | OrderingQuestionBody
         | ShortAnswerQuestionBody
         | LongAnswerQuestionBody
+        | MultiOptionsQuestionBody
         | string;
-      answer: MatcherAnswer | OrderingAnswer | string;
+      answer: MatcherAnswer | OrderingAnswer | number[] | string | number;
     }[]
   >([
     {
@@ -49,9 +51,9 @@ function QuestionContainer() {
       type: "Objective",
       question: {
         q: "What game has the best gameplay?",
-        options: ["GTA V", "Sekiro", "Spiderman", "Elden Ring"],
+        options: [{id: 0, value:"GTA V"}, {id: 1, value: "Sekiro"}, {id: 2, value: "Spiderman"}, {id: 3, value: "Elden Ring"}],
       },
-      answer: "",
+      answer: -1,
     },
     {
       type: "Ordering",
@@ -87,9 +89,17 @@ function QuestionContainer() {
       answer: ""
     },
     {
-      type: "CheckboxSelect",
-      question: "",
-      answer: ""
+      type: "MultiOptions",
+      question: {
+        q: "Select all options that are programming languages",
+        options: [
+          { id: 0, value: "Javascript", selected: false },
+          { id: 1, value: "Python", selected: false },
+          { id: 2, value: "C++", selected: false },
+          { id: 3, value: "CSS", selected: false },
+        ],
+      },
+      answer: []
     }
   ]);
 
@@ -128,7 +138,7 @@ function QuestionContainer() {
               const tempQuestionHolder: ObjectiveQuestionBody = allQuestions[
                 currentQuestionNumber
               ].question as ObjectiveQuestionBody;
-              const tempAnswerHolder : string = allQuestions[currentQuestionNumber].answer as string;
+              const tempAnswerHolder : number = allQuestions[currentQuestionNumber].answer as number;
               return (
                 <Objective incomingObjectiveQuestion={tempQuestionHolder} prevAnswer={tempAnswerHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer}/>
               );
@@ -154,8 +164,10 @@ function QuestionContainer() {
               const tempAnswerHolder : string = allQuestions[currentQuestionNumber].answer as string;
               return <LongAnswer incomingLongAnswerQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder} />
             }
-            case "CheckboxSelect": {
-              return <CheckboxSelect />
+            case "MultiOptions": {
+              const tempQuestionHolder: MultiOptionsQuestionBody = allQuestions[currentQuestionNumber].question as MultiOptionsQuestionBody;
+              const tempAnswerHolder: number[] = allQuestions[currentQuestionNumber].answer as number[];
+              return <MultiOptions incomingMultiOptionsQuestion={tempQuestionHolder} index={currentQuestionNumber} setFinalAnswer={setAnswer} prevAnswer={tempAnswerHolder} />
             }
             default:
               return (

@@ -10,6 +10,7 @@ function ObjectiveMaker() {
   const [options, setOptions] = useState<{id: number, value: string}[]>([{id: 0, value: ""}, {id: 1, value: ""}]);
   const [question, setQuestion] = useState("");
   const [error, setError] = useState("");
+  const [answer, setAnswer] = useState(0);
 
   function textareaHandler(e: ChangeEvent<HTMLTextAreaElement>,selectedOptionId: number){
     setError("");
@@ -21,6 +22,11 @@ function ObjectiveMaker() {
     });
 
     setOptions(tempOptions);
+  }
+
+  function selectHandler(e: ChangeEvent<HTMLSelectElement>){
+    setAnswer(Number(e.target.value));
+    console.log(answer);
   }
 
   function addNewOption(){
@@ -79,11 +85,22 @@ function ObjectiveMaker() {
           }
           </ul>
           <Button text='Add Option' onClick={addNewOption} />
+      </div>
 
-        <div className='mt-3 flex flex-col items-center'>
-          <h3 className='my-2 text-red-600'>{error}</h3>
-          <Button text='Submit' onClick={handleSubmit} />
-            </div>
+      <div>
+        <h3>Select which option is the correct answer</h3>
+        <select name="answer" id="answer" onChange={selectHandler} className='px-2 py-2 max-w-xs bg-white border-2 rounded-md'>
+          {
+            options.map((option) => {
+              return <option value={option.id} key={option.id}>{option.value}</option>
+            })
+          }
+        </select>
+      </div>
+
+      <div className='mt-3 flex flex-col items-center'>
+        <h3 className='my-2 text-red-600'>{error}</h3>
+        <Button text='Submit' onClick={handleSubmit} />
       </div>
     </div>
   )

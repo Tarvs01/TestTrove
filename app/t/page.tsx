@@ -10,7 +10,7 @@ function page() {
       {/* <ObjectiveMaker /> */}
       {/* <OrderingMaker /> */}
       {/* <MatcherMaker /> */}
-      <QuestionContainer />
+      {/* <QuestionContainer /> */}
     </div>
   )
 }

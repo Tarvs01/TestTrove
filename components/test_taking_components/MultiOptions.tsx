@@ -1,17 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "../test_taking_components/styles.module.css";
+import { MultiOptionsQuestionBody, FinalAnswer } from "../types";
 
-function CheckboxSelect() {
-  const [question, setQuestion] = useState({
-    q: "Select all options that are programming languages",
-    options: [
-      { id: 0, value: "Javascript", selected: false },
-      { id: 1, value: "Python", selected: false },
-      { id: 2, value: "C++", selected: false },
-      { id: 3, value: "CSS", selected: false },
-    ],
-  });
+interface MultiOptionsProps{
+  incomingMultiOptionsQuestion: MultiOptionsQuestionBody;
+  setFinalAnswer: FinalAnswer;
+  index: number;
+  prevAnswer: number[];
+}
+
+function MultiOptions({incomingMultiOptionsQuestion, setFinalAnswer, index, prevAnswer}: MultiOptionsProps) {
+  const [question, setQuestion] = useState<MultiOptionsQuestionBody>({q: "", options: []});
   const [answer, setAnswer] = useState<number[]>([])
 
   function toggleSelected(optionId: number){
@@ -32,6 +32,25 @@ function CheckboxSelect() {
     setQuestion({q: question.q, options: tempOptions});
     console.log(answer);
   }
+
+  useEffect(() => {
+    let tempOptionsHolder = incomingMultiOptionsQuestion.options.map((option, index) => {
+      if(prevAnswer.includes(option.id)){
+        return {id: option.id, value: option.value, selected: true}
+      }
+      else{
+        return option;
+      }
+    });
+
+    setQuestion({q: incomingMultiOptionsQuestion.q, options: tempOptionsHolder});
+    setAnswer(prevAnswer);
+  }, []);
+
+  useEffect(() => {
+    setFinalAnswer(index, answer)
+  }, [answer]);
+
   return (
     <div>
       <h3>{question.q}</h3>
@@ -65,4 +84,4 @@ function CheckboxSelect() {
   );
 }
 
-export default CheckboxSelect;
+export default MultiOptions;
