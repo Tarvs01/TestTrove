@@ -29,7 +29,6 @@ export interface MultiOptionsQuestionBody{
     options: {
         id: number;
         value: string;
-        selected: boolean;
     }[];
 }
 

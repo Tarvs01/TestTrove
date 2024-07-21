@@ -93,10 +93,10 @@ function QuestionContainer() {
       question: {
         q: "Select all options that are programming languages",
         options: [
-          { id: 0, value: "Javascript", selected: false },
-          { id: 1, value: "Python", selected: false },
-          { id: 2, value: "C++", selected: false },
-          { id: 3, value: "CSS", selected: false },
+          { id: 0, value: "Javascript"},
+          { id: 1, value: "Python"},
+          { id: 2, value: "C++"},
+          { id: 3, value: "CSS"},
         ],
       },
       answer: []

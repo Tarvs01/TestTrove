@@ -15,21 +15,13 @@ function MultiOptions({incomingMultiOptionsQuestion, setFinalAnswer, index, prev
   const [answer, setAnswer] = useState<number[]>([])
 
   function toggleSelected(optionId: number){
-    let tempOptions: {id: number, value: string, selected: boolean}[] = question.options.map((option) => {
-      if(option.id === optionId){
-        if(option.selected){
-          let tempAnswer = answer.filter((ans) => ans !== option.id);
-          setAnswer(tempAnswer);
-        }
-        else{
-          setAnswer([...answer, option.id]);
-        }
-        return {id: option.id, value: option.value, selected: !option.selected}
-      }
-      return option;
-    });
-
-    setQuestion({q: question.q, options: tempOptions});
+    if(answer.includes(optionId)){
+      let tempAnswer = answer.filter((ans) => ans !== optionId);
+      setAnswer(tempAnswer);
+    }
+    else{
+      setAnswer([...answer, optionId]);
+    }
     console.log(answer);
   }
 
@@ -67,7 +59,7 @@ function MultiOptions({incomingMultiOptionsQuestion, setFinalAnswer, index, prev
                 name="check"
                 id={`check${option.id}`}
                 className="w-4 h-4"
-                checked={option.selected}
+                checked={answer.includes(option.id) ? true : false}
                 onChange={() => toggleSelected(option.id)}
               />
               <label
