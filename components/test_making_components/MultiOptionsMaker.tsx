@@ -89,6 +89,7 @@ function MultiOptionsMaker() {
     <div>
       <div>
         <h3>Enter your question</h3>
+        <Editor value={question} updateValue={setQuestion} />
       </div>
 
       <div>
@@ -118,10 +119,10 @@ function MultiOptionsMaker() {
             );
           })}
         </ul>
-        <Button text="Add Option" onClick={addNewOption} />
+         
       </div>
 
-      <div>
+      <div className="mt-5">
         <h3>Select which of these options are correct</h3>
         <ul>
           {options.map((option) => {

@@ -3,6 +3,7 @@ import ObjectiveMaker from '@/components/test_making_components/ObjectiveMaker'
 import OrderingMaker from '@/components/test_making_components/OrderingMaker'
 import MatcherMaker from '@/components/test_making_components/MatcherMaker'
 import MultiOptionsMaker from '@/components/test_making_components/MultiOptionsMaker'
+import ShortAnswerMaker from '@/components/test_making_components/ShortAnswerMaker'
 import React from 'react'
 
 function page() {
@@ -12,7 +13,8 @@ function page() {
       {/* <OrderingMaker /> */}
       {/* <MatcherMaker /> */}
       {/* <MultiOptionsMaker /> */}
-      <QuestionContainer />
+      <ShortAnswerMaker />
+      {/* <QuestionContainer /> */}
     </div>
   )
 }
