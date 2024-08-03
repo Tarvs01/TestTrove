@@ -6,7 +6,7 @@ import {
   DropResult,
   Droppable,
 } from "@hello-pangea/dnd";
-import { OrderingQuestionBody, OrderingAnswer, FinalAnswer } from "../types";
+import { OrderingQuestionBody, OrderingAnswer, FinalAnswer } from "./types";
 
 interface OrderingProps {
   incomingOrderingQuestion: OrderingQuestionBody,

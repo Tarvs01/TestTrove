@@ -1,6 +1,6 @@
 'use client'
 import React, {useState, useEffect, ChangeEvent} from 'react'
-import { ShortAnswerQuestionBody, FinalAnswer } from '../types';
+import { ShortAnswerQuestionBody, FinalAnswer } from './types';
 
 interface ShortAnswerProps {
   incomingShortAnswerQuestion: ShortAnswerQuestionBody,

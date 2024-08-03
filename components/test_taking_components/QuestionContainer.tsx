@@ -16,7 +16,7 @@ import {
   FinalAnswer,
   LongAnswerQuestionBody,
   MultiOptionsQuestionBody
-} from "../types";
+} from "./types";
 import { nanoid } from "nanoid";
 import LongAnswer from "./LongAnswer";
 

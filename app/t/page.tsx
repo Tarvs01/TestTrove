@@ -10,10 +10,10 @@ function page() {
   return (
     <div className='min-h-screen border'>
       {/* <ObjectiveMaker /> */}
-      {/* <OrderingMaker /> */}
+      <OrderingMaker />
       {/* <MatcherMaker /> */}
       {/* <MultiOptionsMaker /> */}
-      <ShortAnswerMaker />
+      {/* <ShortAnswerMaker /> */}
       {/* <QuestionContainer /> */}
     </div>
   )

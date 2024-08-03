@@ -5,6 +5,8 @@ import Button from "./Button";
 import Image from "next/image";
 import Trashcan from "../../assets/icons/trash-solid.svg";
 import Editor from "../editor_component/Editor";
+import { MultiOptions } from "./types";
+import { nanoid } from "nanoid";
 
 function MultiOptionsMaker() {
   const [question, setQuestion] = useState("");
@@ -82,6 +84,13 @@ function MultiOptionsMaker() {
         return;
     }
 
+    let finalQuestion: MultiOptions = {
+      id: nanoid(),
+      question: question,
+      answer: answer,
+      options: options
+    }
+
     setError("good to go");
   }
 
@@ -119,7 +128,7 @@ function MultiOptionsMaker() {
             );
           })}
         </ul>
-         
+         <Button onClick={addNewOption} text="Add Option" />
       </div>
 
       <div className="mt-5">

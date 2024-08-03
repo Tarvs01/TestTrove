@@ -1,5 +1,5 @@
 import React, {useState, useEffect, ChangeEvent} from 'react'
-import { FinalAnswer, LongAnswerQuestionBody } from '../types'
+import { FinalAnswer, LongAnswerQuestionBody } from './types'
 import styles from "../test_taking_components/styles.module.css"
 
 interface LongAnswerProps {

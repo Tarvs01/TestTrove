@@ -5,6 +5,8 @@ import Button from "./Button";
 import Image from "next/image";
 import Trashcan from "../../assets/icons/trash-solid.svg";
 import Editor from "../editor_component/Editor";
+import { nanoid } from "nanoid";
+import { ShortAnswer } from "./types";
 
 function ShortAnswerMaker() {
   const [question, setQuestion] = useState("");
@@ -69,6 +71,13 @@ function ShortAnswerMaker() {
       }
     }
 
+    let finalQuestion : ShortAnswer = {
+      id: nanoid(),
+      question: question,
+      answers: answers,
+      strictAnswers: isChecked
+    }
+    
     setError("good to go");
   }
 

@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Trashcan from "../../assets/icons/trash-solid.svg"
 import Textarea from './Textarea'
 import Button from './Button'
+import { Objective } from './types'
+import { nanoid } from 'nanoid'
 
 function ObjectiveMaker() {
   const [options, setOptions] = useState<{id: number, value: string}[]>([{id: 0, value: ""}, {id: 1, value: ""}]);
@@ -62,6 +64,12 @@ function ObjectiveMaker() {
       }
     }
 
+    let finalQuestion: Objective = {
+      id: nanoid(),
+      question: question,
+      options: options,
+      answer: answer
+    }
     setError("good to go");
   }
   return (

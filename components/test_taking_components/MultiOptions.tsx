@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "../test_taking_components/styles.module.css";
-import { MultiOptionsQuestionBody, FinalAnswer } from "../types";
+import { MultiOptionsQuestionBody, FinalAnswer } from "./types";
 
 interface MultiOptionsProps{
   incomingMultiOptionsQuestion: MultiOptionsQuestionBody;

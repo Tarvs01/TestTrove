@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ObjectiveQuestionBody, FinalAnswer } from "../types";
+import { ObjectiveQuestionBody, FinalAnswer } from "./types";
 import styles from "../test_taking_components/styles.module.css"
 
 interface ObjectiveProps {

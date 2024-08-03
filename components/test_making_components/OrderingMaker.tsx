@@ -6,6 +6,8 @@ import DownArrow from "../../assets/icons/arrow-down-solid.svg"
 import Trashcan from "../../assets/icons/trash-solid.svg"
 import Textarea from './Textarea';
 import Button from './Button';
+import { Ordering } from './types';
+import { nanoid } from 'nanoid';
 
 function OrderingMaker() {
     const [orderItems, setOrderItems] = useState<{id:number, value: string}[]>([{id: 0, value: ""}, {id: 1, value: ""}]);
@@ -22,9 +24,6 @@ function OrderingMaker() {
           });
 
         setOrderItems(tempItems);
-
-        e.target.style.height = "1px";
-        e.target.style.height = `${5 + e.target.scrollHeight}px`;
     }
 
     function addItem(){
@@ -57,6 +56,12 @@ function OrderingMaker() {
                 setError("All items must have a value");
                 return;
             }
+        }
+
+        let finalQuestion: Ordering = {
+            id: nanoid(),
+            question: question,
+            orderItems: orderItems
         }
         setError("Good to go")
     }

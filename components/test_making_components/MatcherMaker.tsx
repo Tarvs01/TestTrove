@@ -6,6 +6,8 @@ import Trashcan from "../../assets/icons/trash-solid.svg"
 import Editor from '../editor_component/Editor'
 import Textarea from './Textarea'
 import Button from './Button'
+import { Matcher } from './types'
+import { nanoid } from 'nanoid'
 
 function MatcherMaker() {
     const [matches, setMatches] = useState<{id: number, right: string, left: string}[]>([{id: 0, left: "", right: ""}, {id: 1, left: "", right: ""}]);
@@ -63,6 +65,11 @@ function MatcherMaker() {
             }
         }
 
+        let finalQuestion: Matcher = {
+            id: nanoid(),
+            question: question,
+            matches: matches
+        }
         setError("Good to go");
     }
 
